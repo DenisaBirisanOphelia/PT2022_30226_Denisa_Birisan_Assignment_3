@@ -1,35 +1,28 @@
 package start;
 
 import java.sql.SQLException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import bll.StudentBLL;
-import model.Student;
-
+import presentation.ControllerMain;
+ import presentation.View;
+//in maven au adaugat deja ei librarie speciala ,jar pt a pitea lucra cu MySQL
 /**
  * @Author: Technical University of Cluj-Napoca, Romania Distributed Systems
  *          Research Laboratory, http://dsrl.coned.utcluj.ro/
  * @Since: Apr 03, 2017d
  */
 public class Start {
-	protected static final Logger LOGGER = Logger.getLogger(Start.class.getName());
 
-	public static void main(String[] args) throws SQLException {
+    protected static final Logger LOGGER = Logger.getLogger(Start.class.getName());
+	public static void main(String[] args) throws SQLException, NoSuchFieldException, IllegalAccessException {
 
-		StudentBLL studentBll = new StudentBLL();
+   //aici am modelul, interfata principala si controlleru principal, de restu ma ocup pe parcurs
+	   DatabaseModel DBmodel=new DatabaseModel();
+	   View DBview=new View(DBmodel);
+        DBview.setVisible(true);
 
-		Student student1 = null;
+		ControllerMain controlly=new ControllerMain(DBmodel,DBview);
 
-		try {
-			student1 = studentBll.findStudentById(1245);
-
-		} catch (Exception ex) {
-			LOGGER.log(Level.INFO, ex.getMessage());
-		}
-
-		// obtain field-value pairs for object through reflection
-		ReflectionExample.retrieveProperties(student1);
 
 	}
 
